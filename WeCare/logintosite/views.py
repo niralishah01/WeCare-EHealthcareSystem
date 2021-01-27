@@ -27,5 +27,8 @@ def authentication(request):
     elif count==0:
         return render(request,'login.html',{'msg':'invalid password'})
     else:
-        return render(request,'index.html')
+        if(user.IsAdmin):
+            return HttpResponseRedirect('home/adminhome/')
+        elif(user.IsDoctor):
+            return HttpResponseRedirect('home/doctorhome/')
     

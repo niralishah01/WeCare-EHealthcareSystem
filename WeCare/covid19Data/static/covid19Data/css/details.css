@@ -1,0 +1,33 @@
+body{
+    background-image:url("background.png");
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+  }
+  .box_head{
+      background-color:	#003366;
+      color:white;
+      width: 70%;
+      height:20%;
+      padding: 2%;
+      margin-top: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
+  }
+  .box_body{
+      background-color: whitesmoke;
+      width: 70%;
+      height: 80%;
+      padding: 2%;
+      margin-bottom: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
+  }
+  .tbody{
+      background-color:#003366;
+      color:white;
+  }

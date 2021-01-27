@@ -1,0 +1,82 @@
+body{
+    background-image: url(doctor_home-background.png);
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+  }
+  .outterbox{
+    background-color: #e6fff5;
+    border-radius: 10px;
+    padding: 2%;
+    width:95%;
+    margin-top: 2%;
+}
+.heading{
+    color: #000099;
+    font-size: 30px;
+    text-align: center;
+}
+table th{
+    font-size: 18px;
+    color: #00004d;
+    text-align: center;
+}
+table{
+    font-size: 17px;
+    color:#000099;
+}
+form{
+    color: #003399;
+	position:relative;
+    background:none;
+}
+form input
+{
+    display:inline-block;
+    height:30%;
+    width:90%;
+    padding:5px;
+    background-color: inherit;
+    border-color:#003399;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    text-align: center;
+    
+}
+form button
+{
+    display:block;
+    height:30%;
+    width:95%;
+    padding:5px 7px 2px 2px;
+    margin-right: 2%;
+    margin-left: 2%;
+    border:none;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+    background-color:#003399;
+    color:whitesmoke;
+    transition:0.3s;
+}
+form a
+{
+    height:30%;
+    width:30%;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+    color:#003399;
+    padding-bottom: 30px;
+}
+form button:hover
+{
+    height:30%;
+    width:100%;
+    background-color:#3A86B5;
+ }

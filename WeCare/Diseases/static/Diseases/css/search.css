@@ -1,0 +1,38 @@
+body{
+    background-image: url(doctor_home-background.png);
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+  }
+  .outterbox{
+    background-color: #e6fff5;
+    border-radius: 10px;
+    padding:1%;
+    width:60%;
+ 
+}
+input{
+    width:70%;
+    height:50px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 0%;
+    text-align: center;
+}
+button{
+    width: 10%;
+    height: 50px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0%;
+    margin: 0%;
+    background-color:  #0033cc;
+    color:white;
+}
+.heading{
+    color:	 #004080;
+}

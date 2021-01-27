@@ -1,6 +1,85 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Registration</title>
+        {% load static %}
+        <link rel="icon" href="{% static 'home/images/logo.png' %}" type="image/icon type">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{% static 'registration/css/register.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+    </head>
+    <body style="background-image: url('{% static 'logintosite/images/background.png' %}')";>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
+                    <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
+                    <li class="active"><a href="#">Services</a></li>
+                    <li class="active"><a href="#">FAQ's</a></li>
+                    <li class="active"><a href="/covid19Data/getcoronaupdates/">Corona Virus Updates</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav> 
+        <div class="container text-center">
+            <div class="col-sm-12 text-left"> 
+                <div class=" container-fluid box">
+                    <center>
+                        <form action="/registration/addregsdetails/" method = "post">
+                            <br><div class="heading"><b><i>Join the WeCare Family</i></b></div>
+                            {% csrf_token %}
+                            {% if msg5 %}
+                            <h3 style="color: red; align-content: center;text-align: center;">{{msg5}}</h3>
+                            {% endif %}<br>
+                            <span style="font-size: 18px;">Name:</span>
+                            <input type="text" name="name" id="name" placeholder="Your Name" required><br><br>
+                            <span style="font-size: 18px;">Email Id:</span>
+                            <input type="email" name="email" id="email" placeholder="abc@gmail.com" required/><br>
+                            {% if msg3 %}
+                            <p style= color:red>*{{msg3}}</p>
+                            {% endif %}<br>
+                            <span style="font-size: 18px;">Password:</span>
+                            <input type="password" name="passwd" id="password" placeholder="Should have 6-15 characters" required/><br>
+                            {% if msg4 %}
+                            <p style= color:red>*{{msg4}}</p>
+                            {% endif %}
+                            {% if msg1 %}
+                            <p style= color:red>*{{msg1}}</p>
+                            {% endif %}<br>
+                            <span style="font-size: 18px;">Re-Enter Password:</span>
+                            <input type="password" name="repasswd" id="repasswd" placeholder="Same as Password" required/><br>
+                            {% if msg2 %}
+                            <p style= color:red>*{{msg2}}</p>
+                            {% endif %}<br>
+                            <span style="font-size: 18px;">Role:</span>
+                            <input type="text" name="role" id="role" placeholder="Doctor OR Admin" required><br><br>
+                            <button id="register" name="register" type="submit">Join the WeCare Family</button>
+                            <br><br>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div>
+            <br><br>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+        
+    </body>
+</html>
+
+<!--<!DOCTYPE html>
+<html>
+    <head>
         <title>WeCare-registration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -65,4 +144,4 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     </body>
-</html>
+</html>-->

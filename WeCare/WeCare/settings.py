@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home',
     'registration',
     'covid19Data',
+    'Diseases',
 ]
 
 MIDDLEWARE = [
