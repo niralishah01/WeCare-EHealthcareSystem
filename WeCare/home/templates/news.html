@@ -23,7 +23,7 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
                     <li class="active"><a href="/covid19Data/getoption/">Corona Virus Updates</a></li>
@@ -35,38 +35,23 @@
               </div>
             </div>
           </nav> 
-          <div>
-              <img  class="img-fluid" src="{% static 'home/images/home.png' %}" width="100%" height="400px">
-              <div>
-                <button class="btn btn-success" type="button" onclick="location.href='/home/news/'">News Feed</button>
-              </div>
-          </div>
-          <div class="text-center">
-            <div class="symptom">
-                    <h1><b><i>Want to know what you are suffering from?</i></b></h1></br>
-                    <img src="{% static 'home/images/check.png' %}" class="img-fluid"><br>
-                    <h3 style="color: #55AB7F;">Our trusted symptom checker is written and reviewed by well know physicans and medicine practicioners.</br>
-                    Find a possible diagnosis by entering your symptoms and answering some simple questions.</h3><br>
-                    <a href="#"><button type="button" class="btn btn-success active" style="width: 50%;">GO TO OUR SYMPTOM CHECKER</button></a><br><br><br>
-            </div>
-          </div>
-          <div>
-            <div class="text-center login">
-                <img src="{% static 'home/images/login.png' %}" class="img-fluid" height="20%" width="20%">
-                <h1><b><i>Are you a medical expert?</i></b></h1>
-                <h3 style="color:#3A86B5;">Help us make our data rich.<br> Join the We Care family to help others.</h3><br>
-                <a href="/logintosite/login/"><button type="button" class="btn  btn-primary active" style="width: 20%;">Login</button></a>
-                <a href="/registration/getregsdetails/"><button type="button" class="btn btn-primary active" style="width: 20%;">Register</button></a><br><br>
-            </div>
-          </div>
-          <footer  class="container-fluid text-center">
-            <span style="font-size: 18px">
-                <p><h2 style="color: #55AB7F;"><i><b>Find Us On</b></i></h2>
-                  <br><i class="fa fa-facebook-official" style="font-size:44px; color:blue"></i>&nbsp;&nbsp;
-                  <i class="fa fa-instagram" style="font-size:44px; color:magenta"></i>&nbsp;&nbsp;
-                  <i class="fa fa-twitter-square" style="font-size:44px; color:darkblue"></i><br><br>
-                </p>
-            </span>
-          </footer>
-    </body>
-</html>
+	<div class="container"> 
+	{% for new, des,con, i, u in mylist %} 
+			<img src="{{ i }}" alt="Sorry for trouble, currently image is not available..." width="20%" height="40%"> 
+			<h1>title:</h1> {{ new }} 
+			{{ value|linebreaks }} 
+
+			<h3><b>description:</b></h3>{{ des }} 
+			{{ value|linebreaks }}
+			
+			<!-- <h4>content:</h4>{{ con }} 
+			{{ value|linebreaks }} -->
+			<a href="{{u}}">Click here to read full article</a>
+			{{ value|linebreaks }}
+			<br/>
+			<br/>
+	{% endfor %} 
+	</div> 
+
+</body> 
+</html> 
