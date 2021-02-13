@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
 from django.urls import reverse
+from django.template.context_processors import csrf
+from registration.models import UserDetails,Doctor
 import requests
 # from newsapi import NewsApiClient
 # Create your views here.
@@ -44,3 +46,23 @@ def news(request):
         urls.append(t['url'])
     mylist=zip(news,desc,content,image,urls)
     return render(request,'news.html',{'mylist':mylist})
+
+def getprofile(request):
+    name=request.session['doctor']
+    d=UserDetails.objects.get(name=name)
+    c={}
+    c.update(csrf(request))
+    return render(request,'profile.html',{'d':d,'c':c})
+
+def updateprofile(request):
+    name=request.POST['name']
+    email=request.POST['email']
+    contactno=request.POST['contactno']
+    education=request.POST['education']
+    speciality=request.POST['speciality']
+    UserDetails.objects.filter(name=name).update(emailID=email)
+    u=UserDetails.objects.get(name=name)
+    d=Doctor(contactno=contactno,education=education,speciality=speciality,userID=u)
+    d.save()
+    return HttpResponseRedirect('/home/doctorhome/')
+
