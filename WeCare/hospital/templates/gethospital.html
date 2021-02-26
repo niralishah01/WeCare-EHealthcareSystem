@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <center>
+        <form action="/hospital/gethospital/" method="GET" value="{{request.GET.hospital}}">
+            <input type="text" name="hospital" value="{{request.GET.hospital}}" placeholder="Search Hospital By Name">
+            <button type="submit" name="search" ><i class="fa fa-search"></i></button>
+        </form>
+        </center>
+        {% if errmsg %}
+        <p>{{errmsg}}</p>
+        {% endif %}
+        <br/>
+        {% if found %}
+            {% for d in objectlist %}
+                <h3 class="heading"> Name</h3>
+                {{d.name}}
+                <h3 class="heading">Address</h3>
+                {{d.address}}
+                <h3 class="heading">Location</h3>
+                {{d.location}}
+                <h3 class="heading">Speciality</h3>
+                {{d.speciality}}
+                <h3 class="heading">Timings</h3>
+                {{d.timings}}
+            {% endfor %}
+        {% endif %}
+</body>
+</html>
