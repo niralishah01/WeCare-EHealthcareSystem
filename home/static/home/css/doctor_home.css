@@ -1,0 +1,18 @@
+body{
+    background-image: url(doctor_home-background.png);
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+  }
+.row{
+    margin: auto;
+}
+.box{
+    background-color: #65a187;
+    margin-left:5%;
+    margin-right: 5%;
+}
