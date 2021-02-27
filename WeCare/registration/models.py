@@ -13,15 +13,21 @@ class Disease(models.Model):
     Description=models.CharField(max_length=1000)
     Cause=models.CharField(max_length=500)
 
+class Hospital(models.Model):
+    name = models.CharField(max_length=70, unique=True)
+    address = models.CharField(max_length=200)
+    location = models.CharField(max_length=50)
+    speciality = models.CharField(max_length=70)
+    timings = models.CharField(max_length=70)
+
 class Doctor(models.Model):
     contactno=models.IntegerField()
     education=models.CharField(max_length=100)
     speciality=models.CharField(max_length=100) 
     userID=models.ForeignKey(UserDetails,on_delete=models.CASCADE)
 
-class Hospital(models.Model):
+class SkinDisease(models.Model):
     name = models.CharField(max_length=70, unique=True)
-    address = models.CharField(max_length=500)
-    location = models.CharField(max_length=50)
-    speciality = models.CharField(max_length=70)
-    timings = models.CharField(max_length=70)   
+    image1 = models.ImageField(upload_to = "images/")
+    image2 = models.ImageField(upload_to = "images/")
+    image3 = models.ImageField(upload_to = "images/")
