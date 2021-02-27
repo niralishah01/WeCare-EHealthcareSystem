@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html>
+<html>
     <head>
         <title>Home</title>
          {% load static %}
@@ -17,11 +17,10 @@
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
-                    <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
+                    <li class="active"><a href="/home/doctorhome">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
-                    <li class="active"><a href="#">Corona Virus Updates</a></li>
+                    <li class="active"><a href="/covid19Data/getcoronaupdates">Corona Virus Updates</a></li>
                 </ul>
         </nav>
         <div><br><br><br><br><br><br><br></div>
@@ -37,7 +36,7 @@
               <div class="col-sm-6">
                 <span class="glyphicon glyphicon-new-window logo-small"></span>
                 <h4>MODIFY INFORMATION</h4>
-                <p><a href="/Diseases/viewdiseases/?found=True">Modify existing information</a></p>
+                <p><a href="/Diseases/viewdiseases/">Modify existing information</a></p>
               </div>
             </div><br><br><br>
 
@@ -51,7 +50,7 @@
               <div class="col-sm-6">
                 <span class="glyphicon glyphicon-trash logo-small"></span>
                 <h4>DELETE A DISEASE</h4>
-                <p><a href="/Diseases/viewdiseases/?found=False">Delete Existing Diseases</a></p>
+                <p><a href="/Diseases/viewdiseases">Delete Existing Diseases</a></p>
               </div>
             </div><br><br><br>
 
@@ -70,4 +69,4 @@
             </div>
           </div>  
     </body>
-  </html>
+    </html>

@@ -1,0 +1,12 @@
+.box{
+    background-color: honeydew;
+}
+.box td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.box tr{
+    border-bottom: 1px solid black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
