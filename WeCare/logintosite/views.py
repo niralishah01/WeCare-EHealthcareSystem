@@ -28,7 +28,8 @@ def authentication(request):
         return render(request,'login.html',{'msg':'invalid password'})
     else:
         if(user.IsAdmin):
-            return HttpResponseRedirect('home/adminhome/')
+            return HttpResponseRedirect('/home/adminhome/')
         elif(user.IsDoctor):
-            return HttpResponseRedirect('home/doctorhome/')
+            request.session['doctor']=user.name
+            return HttpResponseRedirect('/home/doctorhome/')
     

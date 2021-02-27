@@ -13,9 +13,15 @@ class Disease(models.Model):
     Description=models.CharField(max_length=1000)
     Cause=models.CharField(max_length=500)
 
+class Doctor(models.Model):
+    contactno=models.IntegerField()
+    education=models.CharField(max_length=100)
+    speciality=models.CharField(max_length=100) 
+    userID=models.ForeignKey(UserDetails,on_delete=models.CASCADE)
+
 class Hospital(models.Model):
     name = models.CharField(max_length=70, unique=True)
-    address = models.CharField(max_length=200)
+    address = models.CharField(max_length=500)
     location = models.CharField(max_length=50)
     speciality = models.CharField(max_length=70)
-    timings = models.CharField(max_length=70)
+    timings = models.CharField(max_length=70)   

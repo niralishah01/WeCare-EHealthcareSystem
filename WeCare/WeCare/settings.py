@@ -25,7 +25,7 @@ SECRET_KEY = 'g5!5+paf%w#2*mhl*$x)x_92mn-*q@)r7k+$5mjke&e63_dgqz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'registration',
     'covid19Data',
     'Diseases',
+    'hospital'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST='smtp.gmail.com'
+# EMAIL_HOST_USER='niralipshah2000@gmail.com'
+# EMAIL_HOST_PASSWORD='eqdvzcmvwfptdoaa'
+# EMAIL_HOST_PORT=587
+# EMAIL_USE_TLS=True
+# DEFAULT_FROM_EMAIL='WeCare <noreply@wecare.com>'

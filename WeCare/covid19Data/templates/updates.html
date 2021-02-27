@@ -86,7 +86,12 @@
             {% endif %}
             {% if c %}
             <form action="/covid19Data/coronaDetails/" method="POST">{% csrf_token %}
-            Country:<input type="text" name="countryname" placeholder="Enter country name">
+            Country:<!--<input type="text" name="countryname" placeholder="Enter country name">-->
+            <select name="countryname">
+                {% for c in countries %}
+                    <option value="{{c.name}}">{{c.name}}</option>
+                {% endfor %}
+            </select>
             <input class="btn btn-success" type="submit" value="Find">
             </form>
             {% endif %}

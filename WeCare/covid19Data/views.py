@@ -4,23 +4,23 @@ from django.template.context_processors import csrf
 import requests
 import covid
 # Create your views here.
-def getcoronaupdates(request):
-    data=False
-    while(not data):
-        try:
-            result=requests.get("https://api.covid19api.com/summary")
-            summary=result.json()['Global']
-            # countrydata=result.json()['Countries']
-            labels=['New Confirmed','Total Confirmed','New Recovered','Total Recovered','New Deaths','Total Deaths']
-            dataset=[summary.NewConfirmed,summary.TotalConfirmed,summary.NewRecovered,summary.TotalRecovered,summary.NewDeaths,summary.TotalDeaths]
-            print(dataset)
-            data=True
-        except:
-            data=False
-    # return render(request,'details.html',{'result':summary,'countrydata':countrydata,'labels':labels,'data':dataset})
-    # return render(request,'details.html',{'result':summary,'countrydata':countrydata})
-    # return render(request,'details.html',{'result':summary})
-    return render(request,'details.html',{'result':summary,'labels':labels,'data':dataset})
+# def getcoronaupdates(request):
+#     data=False
+#     while(not data):
+#         try:
+#             result=requests.get("https://api.covid19api.com/summary")
+#             summary=result.json()['Global']
+#             # countrydata=result.json()['Countries']
+#             labels=['New Confirmed','Total Confirmed','New Recovered','Total Recovered','New Deaths','Total Deaths']
+#             dataset=[summary.NewConfirmed,summary.TotalConfirmed,summary.NewRecovered,summary.TotalRecovered,summary.NewDeaths,summary.TotalDeaths]
+#             print(dataset)
+#             data=True
+#         except:
+#             data=False
+#     # return render(request,'details.html',{'result':summary,'countrydata':countrydata,'labels':labels,'data':dataset})
+#     # return render(request,'details.html',{'result':summary,'countrydata':countrydata})
+#     # return render(request,'details.html',{'result':summary})
+#     return render(request,'details.html',{'result':summary,'labels':labels,'data':dataset})
 
 def getoption(request):
     cov=covid.Covid()
@@ -75,7 +75,8 @@ def getname(request):
     confirmed=cov.get_total_confirmed_cases()
     recovered=cov.get_total_recovered()
     deaths=cov.get_total_deaths()
-    return render(request,'updates.html',{'c':c,'active':actives,'confirmed':confirmed,'recovered':recovered,'deaths':deaths})
+    countries = cov.list_countries()
+    return render(request,'updates.html',{'c':c,'active':actives,'confirmed':confirmed,'recovered':recovered,'deaths':deaths,'countries':countries})
 
 def coronaDetails(request):
     cov=covid.Covid()
