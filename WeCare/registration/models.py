@@ -19,3 +19,15 @@ class Hospital(models.Model):
     location = models.CharField(max_length=50)
     speciality = models.CharField(max_length=70)
     timings = models.CharField(max_length=70)
+
+class Doctor(models.Model):
+    contactno=models.IntegerField()
+    education=models.CharField(max_length=100)
+    speciality=models.CharField(max_length=100) 
+    userID=models.ForeignKey(UserDetails,on_delete=models.CASCADE)
+
+class SkinDisease(models.Model):
+    name = models.CharField(max_length=70, unique=True)
+    image1 = models.ImageField(upload_to = "images/")
+    image2 = models.ImageField(upload_to = "images/")
+    image3 = models.ImageField(upload_to = "images/")

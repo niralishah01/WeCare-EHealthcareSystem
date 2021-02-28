@@ -26,8 +26,8 @@
         <div class="container-fluid outterbox">
             <div class="containe-fluid">
                 <center>
-                <form action="/hospital/gethospital/" method="GET" value="{{request.GET.q}}">
-                    <input type="text" name="q" value="{{request.GET.q}}" placeholder="Search Hospital By Name">
+                <form action="/hospital/gethospital/" method="GET" value="{{request.GET.hospital}}">
+                    <input type="text" name="hospital" value="{{request.GET.hospital}}" placeholder="Search Hospital By Name">
                     <button type="submit" name="search" ><i class="fa fa-search"></i></button>
                 </form>
                 </center>

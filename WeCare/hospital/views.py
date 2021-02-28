@@ -17,6 +17,7 @@ def addhospitalinfo(request):
     hospital_location=request.POST.get('location','')
     hospital_speciality=request.POST.get('speciality','')
     hospital_timing = request.POST.get('timings','')
+    print(hospital_address)
     count=0
     hospital=Hospital.objects.all()
     if hospital is not None:
@@ -30,9 +31,10 @@ def addhospitalinfo(request):
         return HttpResponseRedirect('/home/adminhome')
     else:
         return render(request,'addhospitalinfo.html',{'msg1':'Inforation for this hospital is already added, you can update it later....'})
+
 def gethospital(request):
-    query=request.POST.get('hospital','')
-    submitbutton= request.POST.get('search','')
+    query=request.GET['hospital']
+    submitbutton= request.GET['search']
     print(query)
     if query!='':
         lookups=Q(name__icontains=query)
@@ -53,7 +55,7 @@ def viewhospital(request):
 def getupdatedhospitalinfo(request):
     hname=request.GET.get('hname','')
     print(hname)
-    hosp=Hospital.objects.filter(name=hname)
+    hosp=Hospital.objects.get(name=hname)
     c={}
     c.update(csrf(request))
     return render(request,'updatehospitalinfo.html',{'hosp':hosp,'c':c})
@@ -64,7 +66,7 @@ def updatehospitalinfo(request):
     hospital_location=request.POST.get('location','')
     hospital_speciality=request.POST.get('speciality','')
     hospital_timing = request.POST.get('timings','')
-
+    print(hospital_address)
     Hospital.objects.filter(name=hospital_name).update(address=hospital_address,location=hospital_location, speciality=hospital_speciality,timings=hospital_timing)
     return HttpResponseRedirect('/hospital/viewhospital')
 

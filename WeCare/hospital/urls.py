@@ -6,6 +6,7 @@ urlpatterns=[
     path('gethospitalinfo/',gethospitalinfo),
     path('addhospitalinfo/',addhospitalinfo),
     path('viewhospital/',viewhospital),
+     path('',TemplateView.as_view(template_name='hospitalsearchresults.html'),name="hospitalsearch"),
     path('gethospital/',gethospital),
     path('getupdatedhospitalinfo/',getupdatedhospitalinfo),
     path('updatehospitalinfo/',updatehospitalinfo),

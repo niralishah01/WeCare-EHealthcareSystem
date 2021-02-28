@@ -18,7 +18,57 @@
             margin: 0%;
             background-color:#ccffff ;
           }
-        </style>
+          body{
+            font-size: 18px;
+            font-family: 'Times New Roman', Times, serif;
+            }
+            .search-container {
+            margin: 0%;
+            padding: 0%;
+            }
+
+            .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+            background-color: black;
+            }
+            footer {
+            background-color: #FCFDFE;
+            margin: 0%;
+            }
+
+            .well{
+            background-color: cyan;
+            }
+
+            .symptom{
+            margin: 0%;
+            background-color: #FCFDFE;
+            }
+            .symptom h1{
+            color: #16AF5F;
+            font: outline;
+            }
+            .symptom button{
+            font-size: 100%;
+            height: 50%;
+            color:white;
+            }
+            .login{
+            margin: 0%;
+            background-color:#BFDBF1;
+            }
+            .login h1{
+            font: outline;
+            color:#004AAD;
+            }
+            .login button{
+            font-size: 100%;
+            height: 50%;
+            color:white;
+            }
+
+                    </style>
       </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -26,8 +76,8 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
-                    <li class="active"><a href="#">Home</a></li>
-                    <li class="active"><a href="#">Services</a></li>
+                    <li class="active"><a href="/home/">Home</a></li>
+                    <li class="active"><a href="news/">News</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
                     <li class="active"><a href="/covid19Data/getcoronaupdates/">Corona Virus Updates</a></li>
                 </ul>
@@ -47,7 +97,7 @@
                     <img src="{% static 'home/images/check.png' %}" class="img-fluid"><br>
                     <h3 style="color: #55AB7F;">Our trusted symptom checker is written and reviewed by well know physicans and medicine practicioners.</br>
                     Find a possible diagnosis by entering your symptoms and answering some simple questions.</h3><br>
-                    <a href="#"><button type="button" class="btn btn-success active" style="width: 50%;">GO TO OUR SYMPTOM CHECKER</button></a><br><br><br>
+                    <a href="/home/gotosearch/"><button type="button" class="btn btn-success active" style="width: 50%;">GO TO OUR SYMPTOM CHECKER</button></a><br><br><br>
             </div>
           </div>
           <div class="text-center">

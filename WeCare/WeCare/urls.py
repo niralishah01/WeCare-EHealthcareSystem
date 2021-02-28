@@ -24,4 +24,5 @@ urlpatterns = [
     path('registration/',include('registration.urls')),
     path('covid19Data/',include('covid19Data.urls')),
     path('Diseases/',include('Diseases.urls')),
+    path('hospital/',include('hospital.urls')),
 ]

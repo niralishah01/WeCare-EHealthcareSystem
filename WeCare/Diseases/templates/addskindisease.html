@@ -25,39 +25,31 @@
                 </ul>
         </nav> 
         <div class="container-fluid outterbox">
-             <div class="containe-fluid center-text box">
-                <h2 class="heading"><b><i>Disease Information</i></b></h2>
-                {% if msg1 %}
-                    <h3 style="color: red; align-content: center;text-align: center;">{{msg1}}</h3>
-                {% endif %}<br>
+            <div class="containe-fluid center-text box">
+               <h2 class="heading"><b><i>Disease Information</i></b></h2>
+               {% if msg1 %}
+                   <h3 style="color: red; align-content: center;text-align: center;">{{msg1}}</h3>
+               {% endif %}<br>
                 <center>
-                    <form action="/Diseases/adddiseaseinfo/" method="post">{% csrf_token %}
+                    <form action="/Diseases/addskindiseaseinfo/" method="post" enctype="multipart/form-data">{% csrf_token %}
                         <table class="table">
                             <tr>
                                 <td>Name:</td>
                                 <td> <input type="text" name="disease_name" placeholder="Name Of The Disease" required></td>
                             </tr>
                             <tr>
-                                <td> Symptoms:</td>
-                                <td><textarea rows="3" cols="50" name="symptoms" placeholder="What are the symptoms?" required></textarea></td>
+                                <td>Images</td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td>Causes:</td>
-                                <td> <textarea rows="3" cols="50" name="cause" placeholder="List the Causes" required></textarea><br/></td>
+                            <tr><td><input type="file" name="image1" placeholder="Upload Image" required></td><td></td></tr>
+                            <tr><td><input type="file" name="image2" placeholder="Upload Image" required></td><td></td></tr>  
+                            <tr><td><input type="file" name="image3" placeholder="Upload Image" required><td></td></td>
                             </tr>
-                            <tr>
-                                <td>Other Details:</td>
-                                <td><textarea rows="5" cols="50" name="description" placeholder="Any other details" required></textarea></td>
-                            </tr>
-
                         </table>
                         <button type="submit">Add New Disease Information</button><br><br>
                     </form>
                 </center>
-                
             </div>
         </div>
-       
-        
     </body>
-</html>
+    </html>
