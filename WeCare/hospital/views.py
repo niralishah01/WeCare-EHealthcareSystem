@@ -26,11 +26,11 @@ def addhospitalinfo(request):
                 count=1
                 break
     if(count!=1):
-        h=Hospital(name=hospital_name,address=hospital_address,location=hospital_location,speciality=hospital_speciality,timings=hospital_timing)
+        h=Hospital(name=hospital_name,location=hospital_location,speciality=hospital_speciality,timings=hospital_timing,address=hospital_address)
         h.save()
         return HttpResponseRedirect('/home/adminhome')
     else:
-        return render(request,'addhospitalinfo.html',{'msg1':'Inforation for this hospital is already added, you can update it later....'})
+        return render(request,'addhospitalinfo.html',{'msg1':'Information for this hospital is already added, you can update it later....'})
 
 def gethospital(request):
     query=request.GET['hospital']
