@@ -18,7 +18,7 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
-                    <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
+                    <li class="active"><a href="/home/doctorhome/">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
                     <li class="active"><a href="#">Corona Virus Updates</a></li>
@@ -42,23 +42,38 @@
                                <td> Email ID:</td>
                                <td><input type="text" name="email" value="{{d.emailID}}" required></td>
                            </tr>
+                           {% if doc %}
                            <tr>
                                <td>Contact no:</td>
-                               <td> <input type="text" name="contactno" placeholder="mobileno" ><br/></td>
+                               <td> <input type="text" name="contactno" value="{{doc.contactno}}" placeholder="mobileno" ><br/></td>
                            </tr>
                            <tr>
                                <td>Education:</td>
-                               <td><textarea rows="3" cols="50" name="education" placeholder="Education details" ></textarea></td>
+                               <td><textarea rows="3" cols="50" name="education"  placeholder="Education details" >{{doc.education}}</textarea></td>
                            </tr>
                            <tr>
                                <td>Speciality:</td>
-                               <td> <input type="text" name="speciality" placeholder="e.g eye specialist"><br/></td>
+                               <td> <input type="text" name="speciality" value="{{doc.speciality}}" placeholder="e.g eye specialist"><br/></td>
                            </tr>
+                           {% endif %}
+                           {% if notfound %}
+                           <tr>
+                            <td>Contact no:</td>
+                            <td> <input type="text" name="contactno"  placeholder="mobileno" ><br/></td>
+                        </tr>
+                        <tr>
+                            <td>Education:</td>
+                            <td><textarea rows="3" cols="50" name="education" placeholder="Education details" ></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Speciality:</td>
+                            <td> <input type="text" name="speciality"  placeholder="e.g eye specialist"><br/></td>
+                        </tr>
+                        {% endif %}
                        </table>
-                       <button type="submit">Update Profile</button><br><br>
+                       <center><button type="submit">Update Details</button></center>
                    </form>
                </center>
-               
            </div>
        </div>
     </body>

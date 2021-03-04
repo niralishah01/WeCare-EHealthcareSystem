@@ -91,6 +91,42 @@
                     </div>
                     {% endfor %}
                 {% endif %}
+                {% if q3 %}
+                    {% for d in q3 %}
+                    <div class="row">
+                        <div class="col">
+                            <p class="text" style="color: blue;">{{d.name}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if q12 %}
+                    {% for d in q12 %}
+                    <div class="row">
+                        <div class="col">
+                            <p class="text" style="color:black">{{d.name}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if q13 %}
+                    {% for d in q13 %}
+                    <div class="row">
+                        <div class="col">
+                            <p class="text" style="color: black;">{{d.name}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% if q23 %}
+                    {% for d in q23 %}
+                    <div class="row">
+                        <div class="col">
+                            <p class="text" style="color:black;">{{d.name}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
                 {% if sug %}
                     <p style="font-weight:bold;color: green;">{{sug}}</p>
                 {% endif %}
