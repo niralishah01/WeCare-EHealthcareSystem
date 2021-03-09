@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+# from WeCare.settings import dashing
+
+from django.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',TemplateView.as_view(template_name='index.html'),name="homepage"),
@@ -25,4 +31,5 @@ urlpatterns = [
     path('covid19Data/',include('covid19Data.urls')),
     path('Diseases/',include('Diseases.urls')),
     path('hospital/',include('hospital.urls')),
-]
+    path('dashboard/',include('dashboard.urls')),
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
