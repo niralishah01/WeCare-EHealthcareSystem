@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Modify Details</title>
+        <title>Add New Disease</title>
         {% load static %}
         <link rel="icon" href="{% static 'home/images/logo.png' %}" type="image/icon type">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{% static 'Diseases/css/add.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'Diseases/css/update.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/doctor_home.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     </head>
-    <body style="background-image: url('{% static 'logintosite/images/background.png' %}')">
+    <body style="background-image: url('{% static 'logintosite/images/background.png' %}');">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="myNavbar">
@@ -24,37 +23,42 @@
                     <li class="active"><a href="#">FAQ's</a></li>
                     <li class="active"><a href="#">Corona Virus Updates</a></li>
                 </ul>
-        </nav> 
+        </nav>
         <div class="container-fluid outterbox">
             <div class="containe-fluid center-text box">
-               <h2 class="heading"><b><i>Disease Information</i></b></h2>
+               <h2 class="heading"><b><i>Disease Treatment Information</i></b></h2>
                 {% if msg1 %}
-                   <h3 style="color: red; align-content: center;text-align: center;">{{msg1}}</h3>
+                    <h3 style="color: red; align-content: center;text-align: center;">{{msg1}}</h3>
                 {% endif %}<br>
-                {% for d in dis %}
-                    <form action="/Diseases/updatediseaseinfo/" method="post">{% csrf_token %}
-                        <table class="table">
+                <center>
+                    <form action="/Diseases/adddiseasetreatment/" method="POST">{% csrf_token %}
+                        <table class="tabel">
                             <tr>
-                                <td>Name:</td>
-                                <td><input type="text" name="disease_name" value="{{d.name}}" readonly><br/></td>
+                                <td>Select Disease</td>
+                                <td>
+                                    <select name="disease">
+                                        {% for d in diseasedata %}
+                                            <option value="{{d.name}}">{{d.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
                             </tr>
                             <tr>
-                                <td>Symptoms</td>
-                                <td><input type="text" name="symptoms" value="{{d.Symptoms}}" required><br/></td>
+                                <td>Decription</td>
+                                <td>
+                                    <textarea rows="5" cols="50" name="desc" placeholder="Treatment details" required></textarea>
+                                </td>
                             </tr>
                             <tr>
-                                <td>Causes</td>
-                                <td><input type="text" name="cause" value="{{d.Cause}}" required><br/></td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td><input type="text" name="description" value="{{d.Description}}" required><br/><br/></td>
+                                <td>Duration</td>
+                                <td>
+                                    <input type="text" name="dur" placeholder="duration of treatment approximately" required/>
+                                </td>
                             </tr>
                         </table>
-                        <center><button type="submit">Update Details</button></center>
-                        <br><br>
+                        <button type="submit">Add Disease Treatment Details</button><br><br>
                     </form>
-                {% endfor %}
+                </center>
             </div>
         </div>
     </body>

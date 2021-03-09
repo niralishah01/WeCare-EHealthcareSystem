@@ -28,33 +28,29 @@
         <div class="container-fluid outterbox">
             <div class="containe-fluid center-text box">
                <h2 class="heading"><b><i>Disease Information</i></b></h2>
-                {% if msg1 %}
-                   <h3 style="color: red; align-content: center;text-align: center;">{{msg1}}</h3>
+                {% if msg %}
+                   <h3 style="color: red; align-content: center;text-align: center;">{{msg}}</h3>
+                   <center><button type="submit" onclick="location.href='/Diseases/viewdiseases/'">Return</button></center>
                 {% endif %}<br>
-                {% for d in dis %}
-                    <form action="/Diseases/updatediseaseinfo/" method="post">{% csrf_token %}
-                        <table class="table">
-                            <tr>
-                                <td>Name:</td>
-                                <td><input type="text" name="disease_name" value="{{d.name}}" readonly><br/></td>
-                            </tr>
-                            <tr>
-                                <td>Symptoms</td>
-                                <td><input type="text" name="symptoms" value="{{d.Symptoms}}" required><br/></td>
-                            </tr>
-                            <tr>
-                                <td>Causes</td>
-                                <td><input type="text" name="cause" value="{{d.Cause}}" required><br/></td>
-                            </tr>
-                            <tr>
-                                <td>Description</td>
-                                <td><input type="text" name="description" value="{{d.Description}}" required><br/><br/></td>
-                            </tr>
-                        </table>
-                        <center><button type="submit">Update Details</button></center>
-                        <br><br>
-                    </form>
-                {% endfor %}
+                {% if dt %}
+                <form action="/Diseases/updatediseasetreatment/" method="POST">{% csrf_token %}
+                    <table class="table">
+                        <tr>
+                            <td>Name:</td>
+                            <td><input type="text" name="dname" value="{{dt.Disease_id.name}}" readonly/></td>
+                        </tr>
+                        <tr>
+                            <td>Treatment Details</td>
+                            <td><textarea rows="5" cols="50" name="desc">{{dt.description}}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Duration of treatment</td>
+                            <td><input type="text" name="dur" value="{{dt.duration}}" required/></td>
+                        </tr>
+                    </table>
+                    <center><button type="submit">Update Details</button></center>
+                </form>
+                {% endif %}
             </div>
         </div>
     </body>
