@@ -30,6 +30,9 @@
 
         <div class="container-fluid text-center">
             <br>
+            {% if msg %}
+            <center><h2 style="font-weight: bold; color: brown;">{{msg}}</h2></center>
+            {% endif %}
             <div class="row slideanim">
               <div class="col-sm-6">
                 <span class="glyphicon glyphicon-plus logo-small"></span>
@@ -37,9 +40,35 @@
                 <p><a href="/Diseases/getdiseaseinfo/">Insert About A New Disease</a></p>
               </div>
               <div class="col-sm-6">
+                <span class="glyphicon glyphicon-plus logo-small"></span>
+                <h4>ADD DISEASE TREATMENT</h4>
+                <p><a href="/Diseases/getdiseasetreatmentinfo/">Insert About A Disease Treatment</a></p>
+              </div>
+            </div><br><br><br>
+
+            <div class="row slideanim">
+              <div class="col-sm-6">
                 <span class="glyphicon glyphicon-new-window logo-small"></span>
                 <h4>MODIFY INFORMATION</h4>
                 <p><a href="/Diseases/viewdiseases/">Modify existing information</a></p>
+              </div>
+              <div class="col-sm-6">
+                <span class="glyphicon glyphicon-trash logo-small"></span>
+                <h4>DELETE A DISEASE</h4>
+                <p><a href="/Diseases/viewdiseases">Delete Existing Diseases</a></p>
+              </div>
+            </div><br><br><br>
+
+            <div class="row slideanim">
+              <div class="col-sm-6">
+                <span class="glyphicon glyphicon-plus logo-small"></span>
+                <h4>ADD SKINDISEASE WITH IMAGE</h4>
+                <p><a href="/Diseases/getskindiseaseinfo/">Add Images for skin diseases</a></p>
+              </div>
+              <div class="col-sm-6">
+                <span class="glyphicon glyphicon-new-window logo-small"></span>
+                <h4>VIEW SKINDISEASE IMAGES</h4>
+                <p><a href="/Diseases/viewskindiseases/">View SkinDiseases</a></p>
               </div>
             </div><br><br><br>
 
@@ -49,12 +78,12 @@
                 <h4>SEARCH DISEASES</h4>
                 <p><a href="{% url 'searchpage' %}">Search Diseases </a></p>
               </div>
-              
               <div class="col-sm-6">
-                <span class="glyphicon glyphicon-trash logo-small"></span>
-                <h4>DELETE A DISEASE</h4>
-                <p><a href="/Diseases/viewdiseases">Delete Existing Diseases</a></p>
+                <span class="glyphicon glyphicon-search logo-small"></span>
+                <h4>SEARCH FOR DISEASE TREATMENT </h4>
+                <p><a href="{% url 'treatmentsearchpage' %}">Look for treatment by disease name</a></p>
               </div>
+              
             </div><br><br><br>
 
             <div class="row slideanim">
@@ -67,7 +96,7 @@
               <div class="col-sm-6 ">
                 <span class="glyphicon glyphicon-th logo-large"></span>
                 <h4>FIND OTHER DOCTORS</h4>
-                <p><a href="/home/viewprofiles/">View Other Doctor Profiles</a></p>
+                <p><a href="/home/viewdoctorprofiles/">View Other Doctor Profiles</a></p>
               </div>
             </div>
           </div>  
