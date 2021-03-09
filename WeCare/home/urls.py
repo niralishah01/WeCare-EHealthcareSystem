@@ -11,5 +11,6 @@ urlpatterns=[
     path('gotosearch/',gotosearch),
     path('search/',search),
     path('hospitalsearch/',hospitalsearch),
-    path('viewdoctorprofiles/',viewdoctorprofiles)
+    path('viewdoctorprofiles/',viewdoctorprofiles),
+    
 ]

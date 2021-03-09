@@ -1,10 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponsePermanentRedirect,HttpResponseRedirect
+from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.template.context_processors import csrf
-from registration.models import UserDetails,Doctor,Disease,Hospital
+from registration.models import UserDetails,Doctor,Disease,Hospital,SearchSymptomRecord,SearchDiseaseResult
 import requests
 from django.db.models import Q
+from django.core import serializers
+
+
 # from newsapi import NewsApiClient
 # Create your views here.
 symp=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
@@ -27,14 +30,25 @@ symp=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yell
     'palpitations','painful_walking','pus_filled_pimples','blackheads','scurring','skin_peeling',
     'silver_like_dusting','small_dents_in_nails','inflammatory_nails','blister','red_sore_around_nose',
     'yellow_crust_ooze','itchy skin','hunger','snore','vomiting','disequilibrium','numbness','high_pressure_chest','shortness_of_breath','drowsiness','weight_gain','fatigue']
+
 def index(request):
     return render(request,'index.html')
 
 def doctorhome(request):
-    return render(request,'doctor_home.html')
+    if(request.session.get('doctor')):
+        return render(request,'doctor_home.html')
+    else:
+        return HttpResponseRedirect('/logintosite/login/?msg=doctor login is required')
 
 def adminhome(request):
-    return render(request,'admin_home.html')
+    if(request.session.get('admin')):
+        return render(request,'admin_home.html')
+    else:
+        if(request.session.get('doctor')):
+            return render(request,'doctor_home.html',{'msg':'you can not access admin home as you are not an admin'})
+        else:
+            return HttpResponseRedirect('/logintosite/login/?msg=admin login is required')
+
 
 def news(request):
     url = ('http://newsapi.org/v2/top-headlines?'
@@ -70,7 +84,7 @@ def viewdoctorprofiles(request):
     dname=request.session['doctor']
     users=UserDetails.objects.filter(IsDoctor=True)
     for u in users:
-        if(u.name==name):
+        if(u.name==dname):
             continue
         else:
             profiles.append(Doctor.objects.get(userID=u))
@@ -128,7 +142,6 @@ def hospitalsearch(request):
         return render(request,'hospitalsearch.html',{'errmsg':"Enter appropriate search value"})
 
 def gotosearch(request):
-    
     c={}
     c.update(csrf(request))
     return render(request,'search.html',{'c':c,'l1':symp}) 
@@ -140,6 +153,22 @@ def search(request):
     sym2=(int)(request.POST['sym2'])
     if(sym1==0 or sym2==0):
         return render(request,'search.html',{'c':c,'found':False,'l1':symp,'errmsg':'please enter atleast 2 symptoms details'})
+    s1=SearchSymptomRecord.objects.filter(symptom=symp[sym1-1])
+    s2=SearchSymptomRecord.objects.filter(symptom=symp[sym2-1])
+    if(not s1):
+        sym=SearchSymptomRecord(symptom=symp[sym1-1],searchcount=1)
+        sym.save()
+    else:
+        sym=SearchSymptomRecord.objects.get(symptom=symp[sym1-1])
+        sym.searchcount=sym.searchcount+1
+        sym.save()
+    if(not s2):
+        sym=SearchSymptomRecord(symptom=symp[sym2-1],searchcount=1)
+        sym.save()
+    else:
+        sym=SearchSymptomRecord.objects.get(symptom=symp[sym2-1])
+        sym.searchcount=sym.searchcount+1
+        sym.save()
     ds1=Disease.objects.filter(Q(Symptoms__icontains=symp[sym1-1]))
     ds2=Disease.objects.filter(Q(Symptoms__icontains=symp[sym2-1]))
     sym3=(int)(request.POST['sym3'])
@@ -148,10 +177,39 @@ def search(request):
             q1=set(ds1)
             q2=set(ds2)
             q=set(ds1).intersection(set(ds2))
-        
+            
             if(q):
+                for d in q:
+                    d1=SearchDiseaseResult.objects.filter(diseasename=d)
+                    if(not d1):
+                        d1=SearchDiseaseResult(diseasename=d,searchcount=1)
+                        d1.save()
+                    else:
+                        d1=SearchDiseaseResult.objects.get(diseasename=d)
+                        d1.searchcount=d1.searchcount+1
+                        d1.save()
                 return render(request,'search.html',{'q':q,'found':True,'c':c,'l1':symp})
             else:
+                for d in q1:
+                    d1=SearchDiseaseResult.objects.filter(diseasename=d)
+                    if(not d1):
+                        d1=SearchDiseaseResult(diseasename=d,searchcount=1)
+                        d1.save()
+                    else:
+                        d1=SearchDiseaseResult.objects.get(diseasename=d)
+                        d1.searchcount=d1.searchcount+1
+                        d1.save()
+
+                for d in q2:
+                    d1=SearchDiseaseResult.objects.filter(diseasename=d)
+                    if(not d1):
+                        d1=SearchDiseaseResult(diseasename=d,searchcount=1)
+                        d1.save()
+                    else:
+                        d1=SearchDiseaseResult.objects.get(diseasename=d)
+                        d1.searchcount=d1.searchcount+1
+                        d1.save()
+
                 return render(request,'search.html',{'q1':q1,'found':True,'c':c,'q2':q2,'l1':symp,'sug':'provide more symptoms to get perfect results if possible'})
         else:
             return render(request,'search.html',{'msg':'Sorry!!!not found any matching results..kindly request you to provide this details in FAQ. our team will give you satisfiable answer there..','found':False,'c':c,'l1':symp})

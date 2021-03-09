@@ -18,7 +18,7 @@
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
-                    <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
+                    <li class="active"><a href="/home/doctorhome/">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
                     <li class="active"><a href="#">Corona Virus Updates</a></li>
@@ -35,10 +35,18 @@
                        <th>Education</th>
                        <th>Speciality</th>
                        <th>Contact no.</th>
+                       <th>EmailID</th>
                    </tr>
                    {% if profiles %}
                     {% for p in profiles %}
-                        <p>{{p.name}}</p>
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{p.userID.name}}</td>
+                            <td>{{p.education}}</td>
+                            <td>{{p.speciality}}</td>
+                            <td>{{p.contactno}}</td>
+                            <td>{{p.userID.emailID}}</td>
+                        </tr>
                     {% endfor %}
                    {% endif %}
                </table> 
