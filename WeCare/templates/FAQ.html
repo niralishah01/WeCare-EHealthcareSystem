@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <table border="1px">
+            <tr>
+                <th>Sr no.</th>
+                <th>Question</th>
+            </tr>
+            {% for q in que %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{q.que_text}}</td>
+
+                    <!--<td><form action="/FAQ/postanswer/" method="GET">
+                        <input type="hidden" name="question" value="{{q.que_text}}">    
+                        <button type="submit" onclick="location.href='/FAQ/postanswer/'">Answer Question </button>
+                    </form></td>-->
+                </tr>
+            {% endfor %}
+    </table>
+    </body>
+</html>
