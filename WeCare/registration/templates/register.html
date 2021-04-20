@@ -23,7 +23,7 @@
                     <li class="active"><a href="{% url 'homepage' %}">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
-                    <li class="active"><a href="/covid19Data/getcoronaupdates/">Corona Virus Updates</a></li>
+                    <li class="active"><a href="/covid19Data/getoption/">Corona Virus Updates</a></li>
                 </ul>
               </div>
             </div>
@@ -46,7 +46,7 @@
                             <p style= color:red>*{{msg3}}</p>
                             {% endif %}<br>
                             <span style="font-size: 18px;">Password:</span>
-                            <input type="password" name="passwd" id="password" placeholder="Should have 6-15 characters" required/><br>
+                            <input type="password" name="passwd" id="password" placeholder="Should have 6-12 characters" required/></span><br>
                             {% if msg4 %}
                             <p style= color:red>*{{msg4}}</p>
                             {% endif %}
@@ -59,7 +59,7 @@
                             <p style= color:red>*{{msg2}}</p>
                             {% endif %}<br>
                             <span style="font-size: 18px;">Role:</span>
-                            <input type="text" name="role" id="role" placeholder="Doctor OR Admin" required><br><br>
+                            <input type="text" name="role" id="role" placeholder="Doctor OR Admin" value="doctor" readonly><br><br>
                             <button id="register" name="register" type="submit">Join the WeCare Family</button>
                             <br><br>
                         </form>
