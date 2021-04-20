@@ -14,6 +14,7 @@ def gethospitalinfo(request):
 def addhospitalinfo(request):
     hospital_name=request.POST.get('hospital_name','')
     hospital_address=request.POST.get('hospital_address','')
+    pincode=request.POST.get('pincode','')
     hospital_location=request.POST.get('location','')
     hospital_speciality=request.POST.get('speciality','')
     hospital_timing = request.POST.get('timings','')
@@ -26,7 +27,7 @@ def addhospitalinfo(request):
                 count=1
                 break
     if(count!=1):
-        h=Hospital(name=hospital_name,location=hospital_location,speciality=hospital_speciality,timings=hospital_timing,address=hospital_address)
+        h=Hospital(name=hospital_name,pincode=pincode,location=hospital_location,speciality=hospital_speciality,timings=hospital_timing,address=hospital_address)
         h.save()
         return HttpResponseRedirect('/home/adminhome')
     else:
@@ -64,10 +65,11 @@ def updatehospitalinfo(request):
     hospital_name=request.POST.get('hospital_name','')
     hospital_address=request.POST.get('hospital_address','')
     hospital_location=request.POST.get('location','')
+    pincode=request.POST.get('pincode','')
     hospital_speciality=request.POST.get('speciality','')
     hospital_timing = request.POST.get('timings','')
     print(hospital_address)
-    Hospital.objects.filter(name=hospital_name).update(address=hospital_address,location=hospital_location, speciality=hospital_speciality,timings=hospital_timing)
+    Hospital.objects.filter(name=hospital_name).update(address=hospital_address,pincode=pincode,location=hospital_location, speciality=hospital_speciality,timings=hospital_timing)
     return HttpResponseRedirect('/hospital/viewhospital')
 
 def deletehospital(request):
