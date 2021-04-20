@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.template.context_processors import csrf
 from django.shortcuts import render
 from django.db.models import Q
-from registration.models import Disease,SkinDisease,DiseaseTreatment
+from registration.models import Disease,SkinDisease,DiseaseTreatment,SearchDiseaseResult
 
 # # Create your views here.
 def getdiseaseinfo(request):
@@ -80,6 +80,15 @@ def homesearch(request):
         object_list=Disease.objects.filter(lookups)
         print(object_list)
         if (object_list):
+            for o in object_list:
+                d1=SearchDiseaseResult.objects.filter(diseasename=o)
+                if(not d1):
+                    d1=SearchDiseaseResult(diseasename=o,searchcount=1)
+                    d1.save()
+                else:
+                    d1=SearchDiseaseResult.objects.get(diseasename=o)
+                    d1.searchcount=d1.searchcount+1
+                    d1.save()
             return render(request,'homesearchresult.html',{'objectlist':object_list,'found':True})
         else:
             return render(request,'homesearchresult.html',{'errmsg':"SORRY: No search result found...."})
