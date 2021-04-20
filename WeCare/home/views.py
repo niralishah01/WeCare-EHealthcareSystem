@@ -2,11 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponsePermanentRedirect, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.template.context_processors import csrf
-from registration.models import UserDetails,Doctor,Disease,Hospital,SearchSymptomRecord,SearchDiseaseResult
+from registration.models import Disease, Doctor, Hospital, Pharmacy, SearchDiseaseResult, SearchSymptomRecord, UserDetails
 import requests
 from django.db.models import Q
 from django.core import serializers
-
+from geopy.distance import geodesic
+from geopy.distance import great_circle
+from geopy.geocoders import Nominatim
+import geocoder
+# from geopy.distance import geodesic 
+# from geopy.geocoders import Nominatim
+# import geocoder
 
 # from newsapi import NewsApiClient
 # Create your views here.
@@ -83,11 +89,18 @@ def viewdoctorprofiles(request):
     profiles=[]
     dname=request.session['doctor']
     users=UserDetails.objects.filter(IsDoctor=True)
+    docs=Doctor.objects.all()
     for u in users:
         if(u.name==dname):
+            print("cancel",u.name)
             continue
         else:
-            profiles.append(Doctor.objects.get(userID=u))
+            print(u.name)
+            for d in docs:
+                if d.userID==u:
+                    profiles.append(Doctor.objects.get(userID=u))
+                    break
+    print(profiles)
     return render(request,'viewalldoctors.html',{'profiles':profiles})
         
 def getprofile(request):
@@ -102,9 +115,10 @@ def getprofile(request):
             found=True
             doc=doct
             break
+    hospitals=Hospital.objects.all()
     if(found):
-        return render(request,'profile.html',{'doc':doc,'d':d,'c':c})
-    return render(request,'profile.html',{'d':d,'c':c,'notfound':True})
+        return render(request,'profile.html',{'doc':doc,'d':d,'c':c,'hospitals':hospitals})
+    return render(request,'profile.html',{'d':d,'c':c,'notfound':True,'hospitals':hospitals})
 
 def updateprofile(request):
     name=request.POST['name']
@@ -112,8 +126,14 @@ def updateprofile(request):
     contactno=request.POST['contactno']
     education=request.POST['education']
     speciality=request.POST['speciality']
+    changehospital=request.POST['hospital']
+    hospital=request.POST['associatehospital']
     UserDetails.objects.filter(name=name).update(emailID=email)
     u=UserDetails.objects.get(name=name)
+    if(changehospital=="select hospiatl"):
+        h=Hospital.objects.get(name=hospital)
+    else:
+        h=Hospital.objects.get(name=changehospital)
     d=Doctor.objects.all()
     found=False
     for doct in d:
@@ -122,9 +142,9 @@ def updateprofile(request):
             doc=doct
             break
     if(found):
-        Doctor.objects.filter(userID=u).update(contactno=contactno,education=education,speciality=speciality)
+        Doctor.objects.filter(userID=u).update(contactno=contactno,education=education,speciality=speciality,associate_hospital=h)
     else:
-        d=Doctor(contactno=contactno,education=education,speciality=speciality,userID=u)
+        d=Doctor(contactno=contactno,education=education,speciality=speciality,userID=u,associate_hospital=h)
         d.save()
     return HttpResponseRedirect('/home/doctorhome/')
 
@@ -140,6 +160,19 @@ def hospitalsearch(request):
             return render(request,'hospitalsearch.html',{'errmsg':"SORRY: No search result found."})
     else:
         return render(request,'hospitalsearch.html',{'errmsg':"Enter appropriate search value"})
+        
+def pharmacysearch(request):
+    query= request.GET.get('search','')
+    print(query)
+    if query != '':
+        lookups = Q(location__icontains=query)
+        object_list=Pharmacy.objects.filter(lookups)
+        if (object_list):
+            return render(request,'pharmacysearch.html',{'objectlist':object_list,'found':True})
+        else:
+            return render(request,'pharmacysearch.html',{'errmsg':"SORRY: No search result found."})
+    else:
+        return render(request,'pharmacysearch.html',{'errmsg':"Enter appropriate search value"})
 
 def gotosearch(request):
     c={}
@@ -241,6 +274,99 @@ def search(request):
                     return render(request,'search.html',{'q1':q1,'found':True,'c':c,'q2':q2,'l1':symp,'sug':'provide more symptoms to get perfect results if possible'})
             else:
                 return render(request,'search.html',{'msg':'Sorry!!!not found any matching results..kindly request you to provide this details in FAQ. our team will give you satisfiable answer there..','found':False,'c':c,'l1':symp})
-        
+    return render(request,'search.html')
+
+def hospitalsearchnearest(request):
+    object_list=Hospital.objects.all()
+    sorted_list=[]
+    for hosp in object_list:
+        g=geocoder.ip('me')
+        geolocator=Nominatim(user_agent='WeCare')
+        location=geolocator.geocode(hosp.location)
+        print(location)
+        location2=(location.latitude,location.longitude)
+        location3=(g.lat,g.lng)
+        print(location.address)
+        print(g.address)
+        print((location.latitude,location.longitude))
+        print((g.lat,g.lng))
+        hosp.distance=geodesic(location2,location3).km
+        print(hosp.distance)
+        # hosp.distance=int(great_circle(location2,location3).km)
+
+    for hosp in object_list:
+        if hosp.distance<=10:
+            info={
+                    "name":hosp.name,
+                    "address":hosp.address,
+                    "location":hosp.location,
+                    "pincode":hosp.pincode,
+                    "speciality":hosp.speciality,
+                    "timings":hosp.timings,
+                    "distance":hosp.distance
+            }
+            sorted_list.append(info)
+    s_list=sorted(sorted_list,key=lambda i:i['distance'])
+    print(s_list)
+    return render(request,'nearesthospital.html',{'objectlist':s_list,'found':True})
+
+def pharmacysearchnearest(request):
+    object_list=Pharmacy.objects.all()
+    sorted_list=[]
+    for pharm in object_list:
+        g=geocoder.ip('me')
+        geolocator=Nominatim(user_agent='WeCare')
+        location=geolocator.geocode(pharm.location)
+        print(pharm.location)
+        location2=(location.latitude,location.longitude)
+        location3=(g.lat,g.lng)
+        print(location.address)
+        print(g.address)
+        print((location.latitude,location.longitude))
+        print((g.lat,g.lng))
+        pharm.distance=geodesic(location2,location3).km
+
+    for pharm in object_list:
+        if pharm.distance<=5:
+            info={
+                "name":pharm.name,
+                "location":pharm.location,
+                "distance":pharm.distance
+            }
+            sorted_list.append(info)
+    s_list=sorted(sorted_list,key=lambda i:i['distance'])
+    print(s_list)
+    return render(request,'nearestpharmacy.html',{'objectlist':s_list,'found':True})
+
+# def api(request):
+#     user_long=None
+#     user_lat=None
+#     km=3
+#     hospitals=Hospital.objects.all()
+#     pincode=request.GET.get('pincode','')
+#     if pincode:
+#         geolocator=Nominatim(user_agent="WeCare")
+#         location=geolocator.geocode(int(pincode))
+#         user_lat=location.latitude
+#         user_long=location.longitude
+
+#     payload=[]
+#     for hosp in hospitals:
+#         result={
+#            "name":hosp.name,
+#             "address":hosp.address,
+#             "location":hosp.location,
+#             "speciality":hosp.speciality,
+#             "timings":hosp.timings,
+#         }
+#         if pincode:
+#             first=(float(user_lat),float(user_long))
+#             second=(float(hosp.lat),float(hosp.long))
+#             hosp.distance=int(great_circle(first,second).km)
+#             result['distance']=hosp.distance
+#         if result['distance']<=5:
+#             payload.append(result)
+#     s_list=sorted(payload,key=lambda i:i['distance'])
+#     return render(request,'nearesthospital.html',{'objectlist':s_list,'found':True})
 
     

@@ -20,7 +20,7 @@
                     <li class="active"><a href="/home">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
-                    <li class="active"><a href="/covid19Data/getcoronaupdates">Corona Virus Updates</a></li>
+                    <li class="active"><a href="/covid19Data/getoption">Corona Virus Updates</a></li>
                 </ul>
         </nav>
         <div class="container-fluid outterbox center-text ">
@@ -36,6 +36,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Location</th>
+                    <th>Pincode</th>
                     <th>Speciality</th>
                     <th>Timings</th>
                 </tr>
@@ -45,6 +46,7 @@
                                 <td width="15%" >{{d.name}}</td>
                                 <td width="45%">{{d.address}}</td>
                                 <td width="15% ">{{d.location}}</td>
+                                <td width="15% ">{{d.pincode}}</td>
                                 <td width="20% ">{{d.speciality}}</td>
                                 <td   width="25% "  >{{d.timings}}</td>
                         {% endfor %}

@@ -55,6 +55,17 @@
                                <td>Speciality:</td>
                                <td> <input type="text" name="speciality" value="{{doc.speciality}}" placeholder="e.g eye specialist"><br/></td>
                            </tr>
+                           <tr>
+                               <td>Associate Hospital:</td>
+                               <td><input type="text" name="associatehospital" value="{{doc.associate_hospital.name}}"><br/></td>
+                               <td><select name="hospital">
+                                   <option value="select hospiatl" selected>select hospital</option>
+                                    {% for h in hospitals %}
+                                        <option value="{{h.name}}">{{h.name}}</option>
+                                    {% endfor %}
+                                </select>
+                                </td>
+                           </tr>
                            {% endif %}
                            {% if notfound %}
                            <tr>
@@ -68,6 +79,14 @@
                         <tr>
                             <td>Speciality:</td>
                             <td> <input type="text" name="speciality"  placeholder="e.g eye specialist"><br/></td>
+                        </tr>
+                        <tr>
+                            <td>Select Associate Hospital:</td>
+                            <select name="hospital">
+                                {% for h in hospitals %}
+                                    <option value="{{h.name}}">{{h.name}}</option>
+                                {% endfor %}
+                            </select>
                         </tr>
                         {% endif %}
                        </table>

@@ -21,23 +21,23 @@
                     <li class="active"><a href="/home/doctorhome/">Home</a></li>
                     <li class="active"><a href="#">Services</a></li>
                     <li class="active"><a href="#">FAQ's</a></li>
-                    <li class="active"><a href="#">Corona Virus Updates</a></li>
+                    <li class="active"><a href="/covid19Data/getoption/">Corona Virus Updates</a></li>
                 </ul>
         </nav>
         <div><br><br><br><br><br><br><br></div>
         <div class="container-fluid outterbox">
             <div class="containe-fluid center-text box">
                <h2 class="heading"><b><i>View Other Doctor's Details</i></b></h2>
-               <table class="table">
-                   <tr>
-                       <th>Sr No.</th>
-                       <th>Name</th>
-                       <th>Education</th>
-                       <th>Speciality</th>
-                       <th>Contact no.</th>
-                       <th>EmailID</th>
-                   </tr>
                    {% if profiles %}
+                   <table class="table">
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Name</th>
+                        <th>Education</th>
+                        <th>Speciality</th>
+                        <th>Contact no.</th>
+                        <th>EmailID</th>
+                    </tr>
                     {% for p in profiles %}
                         <tr>
                             <td>{{forloop.counter}}</td>
@@ -48,8 +48,8 @@
                             <td>{{p.userID.emailID}}</td>
                         </tr>
                     {% endfor %}
+                </table> 
                    {% endif %}
-               </table> 
             </div>
         </div>
     </body>

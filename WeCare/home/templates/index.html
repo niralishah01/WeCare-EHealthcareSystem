@@ -71,14 +71,14 @@
                     </style>
       </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse" style="position: fixed;width: 100%;">
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <!--<li class="active"><img src="logo.png" width="10%" height="10%"></li>-->
                     <li class="active"><a href="/home/">Home</a></li>
                     <li class="active"><a href="/home/news/">News</a></li>
-                    <li class="active"><a href="#">FAQ's</a></li>
+                    <li class="active"><a href="/FAQ/getquestioninfo/">FAQ's</a></li>
                     <li class="active"><a href="/covid19Data/getoption/">Corona Virus Updates</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -100,62 +100,85 @@
                     <a href="/home/gotosearch/"><button type="button" class="btn btn-success active" style="width: 50%;">GO TO OUR SYMPTOM CHECKER</button></a><br><br><br>
             </div>
           </div>
-          <div class="text-center">
-            <div class="dsearch">
+          <div class="text-center dsearch" style="background-color: #BFDBF1;">
               <img src="{%static 'home/images/dsearch.png' %}" class="img-fluid" style="height: 250px; width: 250px;">
               <h1 style="color:	 #004d4d"><b><i>Want to know about a disease?</i></b></h1>
               <h3 style="color:  #009999">Learn more about a disease from our large bank of information.<br>
               The data is written and reviewed by well known medicine practicioners and physicans.</h3><br>
               <a href="/Diseases/homesearch/"><button type="button" class="btn btn-primary active" style="width: 50%; font-size: 18px;">SEARCH DISEASE</button></a><br><br>
-            </div>
           </div>
           <div class="text-center">
-            <div class="symptom">
-                    <h1><b><i>Find a hospital near you!</i></b></h1></br>
-                    <img src="{% static 'home/images/hospital.png' %}" class="img-fluid" style="height:200px; width:200px;"><br>
+            <div>
+              <img src="{% static 'home/images/hospital.png' %}" class="img-fluid" style="height:200px; width:200px;"><br>
+            </div>
+            <div class="symptom col-sm-6">
+                    <h1><b><i>Find a hospital in an area!</i></b></h1></br>
                     <h3 style="color: #55AB7F;">Enter a location and find all the hospitals located in that area.</h3><br>
                     <form action="/home/hospitalsearch" method="GET">
                       <input type="text" name="search" placeholder="Enter Location" style="width:400px; height:40px; padding:0px; margin: 0px; display: inline;">
                       <button type="submit" style="background-color:#16AF5F; height:40px; padding:0px; margin: 0px; display: inline; width:200px">Find Hospitals</button>
                     </form>
-                    <br><br><br>
+                    <br>
+            </div>
+            <div class="col-sm-6 symptom">
+                  <h1><b><i>Find a Hospital near you!</i></b></h1></br>
+                  <h3 style="color: #55AB7F;">Find the hospital which is closest to your current location.</h3><br>
+                  <form action="/home/hospitalsearchnearest" method="GET">
+                    <button type="submit" style="background-color:#16AF5F; height:40px; padding:0px; margin: 0px; display: inline; width:400px">Find Hospitals</button>
+                  </form>
+                  <br><br><br>
             </div>
           </div>
-          <div>
-            <div class="text-center login">
-                <img src="{% static 'home/images/login.png' %}" class="img-fluid" height="20%" width="20%">
-                <h1><b><i>Are you a medical expert?</i></b></h1>
+          <div class="text-center login">
+              <div>
+                <br><img src="{% static 'home/images/pharmacy.png' %}" class="img-fluid" style="height:200px; width:200px;"><br>
+              </div>
+              <div class="col-sm-6 login">
+                    </br><h1><b><i>Find a Pharmacy in an area</i></b></h1></br>
+                    <h3 style="color: #3A86B5;">Enter a location and find all the Pharmacy located in that area.</h3><br>
+                    <form action="/home/pharmacysearch" method="GET">
+                      <input type="text" name="search" placeholder="Enter Location" style="width:400px; height:40px; padding:0px; margin: 0px; display: inline;">
+                      <button type="submit" style="background-color:#004AAD; height:40px; padding:0px; margin: 0px; display: inline; width:200px">Find Pharmacy</button>
+                    </form>
+                    <br>
+              </div>
+              <div class="col-sm-6 login">
+                </br><h1><b><i>Find a Pharmacy near you!</i></b></h1></br>
+                <h3 style="color: #3A86B5;">Find the pharmacy which is closest to your current location.</h3><br>
+                <form action="/home/pharmacysearchnearest" method="GET">
+                  <button type="submit" style="background-color:#004AAD; height:40px; padding:0px; margin: 0px; display: inline; width:400px">Find Pharmacies</button>
+                </form>
+                <br><br><br>
+              </div>
+          </div>
+            <div class="text-center symptom">
+                <img src="{% static 'home/images/health.png' %}" class="img-fluid" height="18%" width="18%">
+                <h1><b><i style="color:#004AAD;">Are you a medical expert?</span></i></b></h1>
                 <h3 style="color:#3A86B5;">Help us make our data rich.<br> Join the We Care family to help others.</h3><br>
                 <a href="/logintosite/login/"><button type="button" class="btn  btn-primary active" style="width: 20%;">Login</button></a>
                 <a href="/registration/getregsdetails/"><button type="button" class="btn btn-primary active" style="width: 20%;">Register</button></a><br><br>
             </div>
           </div>
-          <footer  class="container-fluid text-center">
+          <!--<footer  class="container-fluid text-center" style="background-color:#EDEDED">
             <span style="font-size: 18px">
-                <p><h2 style="color: #55AB7F;"><i><b>Find Us On</b></i></h2>
+                <h2 style="color: #55AB7F;"><i><b>Find Us On</b></i></h2>
                   <br><i class="fa fa-facebook-official" style="font-size:44px; color:blue"></i>&nbsp;&nbsp;
                   <i class="fa fa-instagram" style="font-size:44px; color:magenta"></i>&nbsp;&nbsp;
                   <i class="fa fa-twitter-square" style="font-size:44px; color:darkblue"></i><br><br>
-                </p>
             </span>
-          </footer>
+          </footer>-->
+          <footer class="container-fluid text-center" style="background-color:rgb(37, 37, 37);  left: 0px; bottom: 0px;width: 100%;">
+            <span style="font-size: 20px; color: #FFFFFF;">
+              <img src="{% static 'home/images/logo.png' %}" style="height: 50px;width: 50px;">
+              &nbsp;&nbsp;
+              &copy; 2021 - WeCare &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Deveoped By: Nirali Shah & Krishna Shah
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href=""><i class="fa fa-facebook-official text-center" style="font-size:35px; color:rgb(14, 112, 240)"></i></a>&nbsp;&nbsp;
+              <a href=""><i class="fa fa-instagram text-center" style="font-size:35px; color:rgb(241, 31, 206)"></i></a>&nbsp;&nbsp;
+              <a href=""><i class="fa fa-twitter-square text-center" style="font-size:35px; color:rgb(34, 156, 238)"></i></a><br/>
+              <br/>
+            </span>
+        </footer>
     </body>
 </html>
-<!--<!DOCTYPE html>
-<html>
-    <head>
-        <title>WeCare-Home</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    </head>
-    <body>
-        <p style="text-align: center;" class="display-3 text-highlight">WeCare</p>
-        <a class="btn btn-outline-primary" href="/covid19Data/getcoronaupdates/">CoronavirusUpdates</a>
-        <a style="float: right;" class="btn btn-outline-primary" href="/logintosite/login/">Login</a>
-        <a style="float: right;" class="btn btn-outline-primary" href="/registration/getregsdetails/">Sign Up</a><br/><br/>
-       
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    </body>
-</html>-->
