@@ -75,7 +75,6 @@
                 </div>            
             </div>
         </div>
-        <h3><b><u>Countrywise Data</u></b></h3>
         <div>
             {% if o %}
             <form action="/covid19Data/selectoption/" method="POST">{% csrf_token %}
@@ -85,6 +84,7 @@
             </form>
             {% endif %}
             {% if c %}
+            <h3><b><u>Countrywise Data</u></b></h3>
             <form action="/covid19Data/coronaDetails/" method="POST">{% csrf_token %}
             Country:<!--<input type="text" name="countryname" placeholder="Enter country name">-->
             <select name="countryname">
@@ -125,10 +125,11 @@
         </div>
         {% endif %}
         {% if name %}
+        <h3><b><u>Countrywise Data</u></b></h3>
             <h2>{{name}}</h2>
         {% endif %}
         <div id="container" style="width: 50%;">
-            <canvas id="pie-chart">
+            <canvas id="pie-chart"
             </canvas>
             <!-- {% if name %}
             <h2>{{name}}</h2>
@@ -145,9 +146,9 @@
                             label:'active',
                             data:{{data|safe}},
                             backgroundColor:[
-                            'pink',
-                            'yellow',
+                            'red',
                             'green',
+                            'blue',
                          ],
                         }]
                     },
@@ -156,6 +157,8 @@
                     }
                 });
                 }
+
+                
             </script>
         </div>
         <div>

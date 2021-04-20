@@ -62,7 +62,7 @@ def allcountrydata(request):
         crecovered.append(data['recovered'])
         cconfirmed.append(data['confirmed'])
         index+=1
-        if(index==25):
+        if(index==50):
             break
     mylist=zip(cname,cactive,cdeaths,crecovered,cconfirmed)
     return render(request,'updates.html',{'active':actives,'confirmed':confirmed,'recovered':recovered,'deaths':deaths,'mylist':mylist})
