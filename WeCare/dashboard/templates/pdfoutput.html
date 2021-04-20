@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>PDF output</title>
+        <style>
+            @page{
+                size:"A4";
+                margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+                @top-center{
+                    content:"WECARE";
+                }
+
+                @bottom-right{
+                    content: "Page " counter(page) " of " counter(pages);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        {%load static%}
+        <img src="{% static 'home/images/logo.png' %}"/>
+        <!-- <h2>Symptosearch Recors</h2>
+        <table class="table">
+            <thead>
+                <th>No</th>
+                <th>Symptom</th>
+                <th>SearchCount</th>
+            </thead>
+            <tbody>
+                {% for r in records %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{r.symptom}}</td>
+                        <td>{{r.searchcount}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+    </body>
+</html>
