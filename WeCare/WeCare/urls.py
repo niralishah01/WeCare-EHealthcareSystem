@@ -32,4 +32,6 @@ urlpatterns = [
     path('Diseases/',include('Diseases.urls')),
     path('hospital/',include('hospital.urls')),
     path('dashboard/',include('dashboard.urls')),
+    path('pharmacy/',include('Pharmacy.urls')),
+    path('FAQ/',include('FAQ.urls')),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
